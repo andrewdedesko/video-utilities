@@ -21,8 +21,12 @@ def generate_thumbnails(dir_path):
 
                 if not os.path.exists(thumbnail_path):
                     print(f"Generating thumbnail for {os.path.basename(path)}")
-                    generate_thumbnail(path, incomplete_thumbnail_path)
-                    os.rename(incomplete_thumbnail_path, thumbnail_path)
+                    try:
+                        generate_thumbnail(path, incomplete_thumbnail_path)
+                        os.rename(incomplete_thumbnail_path, thumbnail_path)
+                    except Exception as e:
+                        print(f"Failed to generate thumbnail for {path}")
+                        print(e)
 
 
 def generate_thumbnail(video_path, thumbnail_path):
